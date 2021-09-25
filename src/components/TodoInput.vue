@@ -19,9 +19,7 @@ export default {
     addTodo() {
       console.log(this.newTodoItem);
       if (this.newTodoItem !== '') {
-        var obj = {completed: false, item: this.newTodoItem};
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj)); //LocalStorage Store시 Stringfy로 처리
-        //localStorage.setItem(this.newTodoItem, this.newTodoItem);
+        this.$emit('addTodoItem', this.newTodoItem); //하위에서 이벤트 발생됌
         this.clearInput();
         //저장 로직 수행
       }

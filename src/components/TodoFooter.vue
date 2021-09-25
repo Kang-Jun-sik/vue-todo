@@ -11,7 +11,8 @@ export default {
   name: "TodoFooter",
   methods: {
     clearTodo() {
-      localStorage.clear();
+      this.$emit('clearAll');
+      //localSto  rage.clear();
     }
   },
 }

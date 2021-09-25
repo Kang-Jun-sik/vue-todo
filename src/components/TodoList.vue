@@ -1,9 +1,9 @@
 <template>
   <div>
     <ul>
-      <li v-for="(todoItem,index) in todoItems" :key="todoItem.item" class="shadow">
+      <li v-for="(todoItem,index) in propsedata" :key="todoItem.item" class="shadow">
         <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}"
-           v-on:click="toogleComplete(todoItem,index)"></i>
+           v-on:click="toggleComplete(todoItem,index)"></i>
         <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
         <span class="removeBtn" @click="removeTodo(todoItem,index)">
         <i class="fas fa-trash"></i>
@@ -16,34 +16,20 @@
 <script>
 export default {
   name: "TodoList",
+  props: ['propsedata'],
   data() {
-    return {
-      todoItems: []
-    }
+    return {}
   },
   methods: {
     removeTodo(todoItem, index) {
-      console.log(todoItem, index);
-
-      localStorage.removeItem(todoItem);
-      this.todoItems.splice(index, 1);
+      this.$emit('removeItem', todoItem, index);
     },
-    toogleComplete(todoItem, index) {
-      todoItem.completed = !todoItem.completed;
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item,JSON.stringify(todoItem));
-      console.log(index);
+    toggleComplete(todoItem, index) {
+      this.$emit('toggleItem', todoItem, index);
     }
   },
   created() {
-    //인스턴스가 생성되자 마자 호출
-    if (localStorage.length > 0) {
-      for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== 'loglevel:webpack-dev-server')
-          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-        //this.todoItems.push(localStorage.key(i));
-      }
-    }
+
   },
   mounted() {
 
