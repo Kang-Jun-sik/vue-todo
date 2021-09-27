@@ -22,10 +22,10 @@ import TodoInput from "@/components/TodoInput";
 export default {
   name: 'App',
   components: {
-    'TodoHeader': TodoHeader,
-    'TodoList': TodoList,
-    'TodoFooter': TodoFooter,
-    'TodoInput': TodoInput
+    TodoHeader,
+    TodoList,
+    TodoFooter,
+    TodoInput
   },
   data() {
     return {
@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     addOneItem(todoItem) {
-      var obj = {completed: false, item: todoItem};
+      const obj = {completed: false, item: todoItem};
       localStorage.setItem(todoItem, JSON.stringify(obj)); //LocalStorage Store시 Stringfy로 처리
       this.todoItems.push(obj);
     },

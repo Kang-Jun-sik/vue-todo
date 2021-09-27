@@ -26,7 +26,9 @@ import Modal from '@/components/common/Modal';
 
 export default {
   name: "TodoInput",
-  components: {Modal},
+  components: {
+    Modal
+  },
   data() {
     return {
       newTodoItem: "",
