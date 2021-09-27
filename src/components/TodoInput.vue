@@ -4,15 +4,33 @@
     <span class="addContainer" @click="addTodo">
       <i class="fas fa-plus"></i>
     </span>
+    <Modal v-if="showModal" @close="showModal=false">
+      <!--
+        you can use custom content here to overwrite
+        default content
+      -->
+      <h3 slot="header">
+        경고!
+        <i class="closeModalBtn fas fa-times" @click="showModal=false"></i>
+      </h3>
+
+      <h3 slot="body">
+        아무것도 입력하지 않으셨습니다.
+      </h3>
+    </Modal>
   </div>
 </template>
 
 <script>
+import Modal from '@/components/common/Modal';
+
 export default {
   name: "TodoInput",
+  components: {Modal},
   data() {
     return {
-      newTodoItem: ""
+      newTodoItem: "",
+      showModal: false
     }
   },
   methods: {
@@ -22,6 +40,8 @@ export default {
         this.$emit('addTodoItem', this.newTodoItem); //하위에서 이벤트 발생됌
         this.clearInput();
         //저장 로직 수행
+      } else {
+        this.showModal = !this.showModal;
       }
     },
     clearInput() {
@@ -60,4 +80,9 @@ input:focus {
   color: white;
   vertical-align: middle;
 }
+
+.closeModalBtn {
+  color: #42b983;
+}
+
 </style>
