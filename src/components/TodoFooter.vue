@@ -10,10 +10,8 @@
 export default {
   name: "TodoFooter",
   methods: {
-
     clearTodo() {
-      this.$emit('clearAll');
-      //localSto  rage.clear();
+      this.$store.commit('clearAllItems');
     }
   },
 }

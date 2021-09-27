@@ -39,7 +39,8 @@ export default {
     addTodo() {
       console.log(this.newTodoItem);
       if (this.newTodoItem !== '') {
-        this.$emit('addTodoItem', this.newTodoItem); //하위에서 이벤트 발생됌
+        this.$store.commit('addOneItem', this.newTodoItem);
+        //this.$emit('addTodoItem', this.newTodoItem); //하위에서 이벤트 발생됌
         this.clearInput();
         //저장 로직 수행
       } else {
